@@ -1,38 +1,17 @@
 # Sentiment Analyzer
 
-An AI-based sentiment analyzer for product reviews and social media posts.
-
-## Features
-- Analyzes text as Positive / Negative / Neutral
-- Shows confidence score
-- Saves results to MongoDB
-- Pie chart showing sentiment breakdown
-- Recent analysis history table
+AI-based sentiment analyzer for product reviews and social media posts.
 
 ## Technologies
-- Python, Flask, Transformers (HuggingFace), MongoDB
+- Python, Flask, Transformers (HuggingFace)
 
-## Setup
+## How to Run
 
-### 1. Install MongoDB
-Download from: https://www.mongodb.com/try/download/community
-Install and start MongoDB (it runs on port 27017 by default)
-
-### 2. Clone the repo
-```bash
-git clone https://github.com/your-username/sentiment-analyzer.git
-cd sentiment-analyzer
-```
-
-### 3. Install dependencies
-```bash
+1. Install dependencies
 pip install -r requirements.txt
-```
 
-### 4. Run the app
-```bash
+2. Run the app
 python app.py
-```
 
-### 5. Open in browser
+3. Open browser
 Go to: http://localhost:5000
