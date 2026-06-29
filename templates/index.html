@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analyzer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #333; }
+        textarea { width: 100%; height: 100px; padding: 10px; font-size: 14px; }
+        button { margin-top: 10px; padding: 10px 20px; background: #4CAF50; color: white; border: none; cursor: pointer; font-size: 14px; }
+        button:hover { background: #45a049; }
+        .result { margin-top: 20px; padding: 15px; border-left: 5px solid #4CAF50; background: #f9f9f9; }
+        .Positive { border-color: green; }
+        .Negative { border-color: red; }
+        .Neutral  { border-color: gray; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; font-size: 13px; }
+        th { background: #f2f2f2; }
+        canvas { max-width: 300px; margin: 20px auto; display: block; }
+    </style>
+</head>
+<body>
+
+<h1>Sentiment Analyzer</h1>
+
+<form method="POST">
+    <textarea name="review" placeholder="Enter a product review or social media post..."></textarea><br>
+    <button type="submit">Analyze</button>
+</form>
+
+{% if result %}
+<div class="result {{ result.sentiment }}">
+    <strong>Sentiment:</strong> {{ result.sentiment }}<br>
+    <strong>Confidence:</strong> {{ result.score }}%<br>
+    <strong>Text:</strong> {{ result.text }}
+</div>
+{% endif %}
+
+<h2>Sentiment Overview</h2>
+<canvas id="chart"></canvas>
+<script>
+    new Chart(document.getElementById("chart"), {
+        type: "pie",
+        data: {
+            labels: ["Positive", "Negative", "Neutral"],
+            datasets: [{
+                data: [{{ pos }}, {{ neg }}, {{ neu }}],
+                backgroundColor: ["#4CAF50", "#f44336", "#9e9e9e"]
+            }]
+        }
+    });
+</script>
+
+<h2>Recent Analyses</h2>
+<table>
+    <tr><th>Text</th><th>Sentiment</th><th>Score</th><th>Date</th></tr>
+    {% for item in history %}
+    <tr>
+        <td>{{ item.text[:60] }}...</td>
+        <td>{{ item.sentiment }}</td>
+        <td>{{ item.score }}%</td>
+        <td>{{ item.date }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
